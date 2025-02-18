@@ -35,8 +35,8 @@ This repository includes the following themes:
      - Integrated widget areas
      - Easy-to-use options for theme customization
 
-### 2. **[Theme Name]**
-   - A description of your second theme here.
+### 2. **Dudix Eleven**
+   - Under construction.
 
 (You can add more themes as you build them, just repeat the format above.)
 
