@@ -7,7 +7,7 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class('post-preview'); ?>>
     <!-- <div class="post-preview-container"> -->
         <?php if (has_post_thumbnail()) : ?>
-            <div class="post-thumbnail">
+            <div class="post-thumbnail-index">
                 <?php the_post_thumbnail('medium'); ?>
             </div>
         <?php endif; ?>

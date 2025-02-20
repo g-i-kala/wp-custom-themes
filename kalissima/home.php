@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying all 
+ * The template for displaying home page - all posts 
  */
 get_header();
 ?>
@@ -11,14 +11,12 @@ get_header();
 
 			if ( is_home() && ! is_front_page() ) :
 				?>
-				<header>
+					<header class="home-header">
 					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>	
+					</header>
 				<?php
 			endif;
 			?>
-            <!-- the sticky row -->
-            <?php get_template_part('template-parts/content/content','sticky-posts') ?>
 
             <!-- normal posts -->
             <?php get_template_part('template-parts/content/content','all-posts') ?>

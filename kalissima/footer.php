@@ -8,7 +8,7 @@
         <footer id="colophon" class="site-footer">
             <div class="site-footer flex flex-col">
 
-            <?php get_template_part('sidebar-footer'); ?>
+            <?php get_template_part('template-parts/footer/sidebar', 'footer'); ?>
 
             </div>
             <div class="footer-copyright flex felx-col">

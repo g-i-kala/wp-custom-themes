@@ -22,37 +22,32 @@
 
         <header>
             <div class="header-wrapper">
-                <?php if ( get_header_image() ) : ?>
-                <div id="site-header">
-                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-                        <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="">
-                    </a>
-                </div>
-                <?php endif; ?>
 
-                <?php if ( has_custom_logo() ) { ?>
-                    <div id="site-logo">
-                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-                        <?php the_custom_logo(); ?>
+                <div class="flex flex-row content-container space-between-center">
+                    <?php if ( has_custom_logo() ) { ?>
+                        <div id="site-logo">
+                            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+                            <?php the_custom_logo(); ?>
+                        </div>
+                    <?php } else { ?>
+                        <h1 class="site-title"><?php bloginfo('name'); ?></h1>
+                        <p class="site-description"><?php bloginfo('description'); ?></p>
+                    <?php } ?>
+                    
+                    <div class="site-nav">
+                    <?php
+                    wp_nav_menu( array(
+                        'theme_location' => 'header-menu',
+                        'container' => 'nav',
+                        'container_class' => 'header-menu-container',
+                        'menu_class' => 'header-menu',
+                    ) );
+                    ?>
                     </div>
-                <?php } else { ?>
-                    <h1 class="site-title"><?php bloginfo('name'); ?></h1>
-                    <p class="site-description"><?php bloginfo('description'); ?></p>
-                <?php } ?>
-                
-                <div class="site-nav">
-                <?php
-                wp_nav_menu( array(
-                    'theme_location' => 'header-menu',
-                    'container' => 'nav',
-                    'container_class' => 'header-menu-container',
-                    'menu_class' => 'header-menu',
-                ) );
-                ?>
-                </div>                
+                </div>             
                 
             </div>
             
         </header>
         <div class="content-wrapper"> <!-- Content starts -->
-            <div class="content-container"> <!-- Content starts -->
+            <div class="content-container"> <!-- Container starts -->

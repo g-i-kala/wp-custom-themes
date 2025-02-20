@@ -15,9 +15,11 @@
      <div class="page-wrapper">
          <div class="page-content">
              <h2><?php _e( 'It looks like the wind just dropped..', 'twentythirteen' ); ?></h2>
-             <p><?php _e( 'Maybe try a search?', 'twentythirteen' ); ?></p>
-
-             <?php get_search_form(); ?>
+             
+             <div class="search-404">
+                <p><?php _e( 'Maybe try a search?', 'twentythirteen' ); ?></p>
+                <?php get_search_form(); ?>
+             </div>
          </div><!-- .page-content -->
      </div><!-- .page-wrapper -->
 
@@ -25,6 +27,5 @@
 </div><!-- #primary -->
 
 <?php 
-    get_sidebar();
     get_footer();
 ?>

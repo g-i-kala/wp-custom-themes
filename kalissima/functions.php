@@ -1,10 +1,10 @@
 <?php
 
 /**
- * MyFirstTheme's functions and definitions
+ * kalissima's functions and definitions
  *
- * @package MyFirstTheme
- * @since MyFirstTheme 1.0
+ * @package kalissima
+ * @since kalissima 1.0
  */
 
 /**
@@ -17,7 +17,7 @@ if ( ! isset( $content_width ) ) {
 }
 
 
-if ( ! function_exists( 'myfirsttheme_setup' ) ) :
+if ( ! function_exists( 'kalissima_setup' ) ) :
 
 	/**
 	 * Sets up theme defaults and registers support for various
@@ -27,13 +27,13 @@ if ( ! function_exists( 'myfirsttheme_setup' ) ) :
 	 * hook, which runs before the init hook. The init hook is too late
 	 * for some features, such as indicating support post thumbnails.
 	 */
-	function myfirsttheme_setup() {
+	function kalissima_setup() {
 
 		/**
 		 * Make theme available for translation.
 		 * Translations can be placed in the /languages/ directory.
 		 */
-		load_theme_textdomain( 'myfirsttheme', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'kalissima', get_template_directory() . '/languages' );
 
 		/**
 		 * Add default posts and comments RSS feed links to <head>.
@@ -49,8 +49,8 @@ if ( ! function_exists( 'myfirsttheme_setup' ) ) :
 		 * Add support for two custom navigation menus.
 		 */
 		register_nav_menus( array(
-			'header-menu'   => __( 'Header Menu', 'myfirsttheme' ),
-			'extra-menu' => __( 'Extra Menu', 'myfirsttheme' ),
+			'header-menu'   => __( 'Header Menu', 'kalissima' ),
+			'footer-menu' => __( 'Footer Menu', 'kalissima' ),
 		) );
 
 		/**
@@ -73,8 +73,8 @@ if ( ! function_exists( 'myfirsttheme_setup' ) ) :
 		add_theme_support( 'automatic-feed-links' );
 
 	}
-endif; // myfirsttheme_setup
-add_action( 'after_setup_theme', 'myfirsttheme_setup' );
+endif; // kalissima_setup
+add_action( 'after_setup_theme', 'kalissima_setup' );
 
 //Header customization 
 
@@ -146,3 +146,58 @@ function my_register_sidebars() {
 	);
 	/* Repeat register_sidebar() code for additional sidebars. */
 }
+
+// Add custom hero image on front page
+function kalissima_customize_register($wp_customize) {
+    // Add a section for the hero image
+    $wp_customize->add_section('hero_image_section', array(
+        'title' => __('Hero Image', 'kalissima'),
+        'priority' => 30,
+    ));
+
+    // Add a setting for the hero image
+    $wp_customize->add_setting('hero_image', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+
+    // Add the image control
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'hero_image', array(
+        'label' => __('Upload Hero Image', 'kalissima'),
+        'section' => 'hero_image_section',
+        'settings' => 'hero_image',
+    )));
+}
+add_action('customize_register', 'kalissima_customize_register');
+
+// newletter on/off
+
+function mytheme_customize_register( $wp_customize ) {
+    $wp_customize->add_section( 'newsletter_section', array(
+        'title'    => __( 'Newsletter', 'kalissima' ),
+        'priority' => 120,
+    ) );
+
+    $wp_customize->add_setting( 'show_newsletter', array(
+        'default'   => true,
+        'transport' => 'refresh',
+    ) );
+
+    $wp_customize->add_control( 'show_newsletter_control', array(
+        'label'    => __( 'Show Newsletter Form', 'kalissima' ),
+        'section'  => 'newsletter_section',
+        'settings' => 'show_newsletter',
+        'type'     => 'checkbox',
+    ) );
+}
+add_action( 'customize_register', 'mytheme_customize_register' );
+
+// limit search results to 9
+
+function pd_search_posts_per_page($query) {
+    if ( $query->is_search ) {
+        $query->set( 'posts_per_page', '6' );
+    }
+    return $query;
+}
+add_filter( 'pre_get_posts','pd_search_posts_per_page' );
