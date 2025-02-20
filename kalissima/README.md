@@ -75,6 +75,6 @@ This theme is licensed under the [GPL-2.0 License](LICENSE).
 Feel free to fork this repository and submit pull requests. If you find any issues, please open a ticket in the issues section.
 
 ## Support
-For any support requests, please contact [your email here].
+For any support requests, please contact karocreativedesigns@gmail.com.
 
 Enjoy creating with the Kalissima WordPress Theme!
