@@ -34,10 +34,3 @@
 
     </div>       
 </article>
-
-<!-- Comments Section -->
-<?php if (comments_open() || get_comments_number()) : ?>
-    <div class="comments-section">
-        <?php comments_template(); ?>
-    </div>
-<?php endif; ?>

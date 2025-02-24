@@ -47,10 +47,11 @@
     --secondary-color: #0B3C73;
     --accent-color: #4271A6;
     --text-color: #333;
-    --white-color: white;
+    --content-bg-color:#FFF;
+    --white-color: #FFF;
     --lihtgray--color: lightgray;
     --darkgray--color: darkgray;
-    --black-color: black;
+    --black-color: #000;
 }
 
 html {
@@ -96,8 +97,8 @@ img {
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: var(--white-color);
-    padding: 4rem 0;
+    background-color: var(--content-bg-color);
+    padding: 6rem 0 3rem 0;
 }
 
 .content-container {
@@ -140,7 +141,7 @@ img {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    max-height: 6rem;
+    max-height: 8rem;
 }
 
 .space-between-center {
@@ -160,19 +161,20 @@ img {
 }
 
 .header-menu-container ul,
-.footer-menu {
+.footer-menu-container ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-.header-menu-container ul li {
+.header-menu-container ul li,
+.footer-menu-container ul li {
     display: inline-block;
     margin-right: 1rem;
 }
 
 .header-menu-container ul li a,
-.footer-menu a {
+.footer-menu-container ul li a {
     text-decoration: none;
     font-size: 1.3rem;
     font-weight: 600;
@@ -181,8 +183,47 @@ img {
     letter-spacing: 0.1rem;
 }
 
-.header-menu-container ul li a:hover {
-    color: var(--accent-color); /* Change the hover color as needed */
+/* Hamburger Menu */
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: transparent; 
+    border: none; 
+    padding: 10px; /
+}
+
+.hamburger .bar {
+    display: block; 
+    width: 2rem; 
+    height: 0.2rem; 
+    margin: 0.2rem auto; 
+    background-color: var(--secondary-color); 
+    border-radius: 8px;
+    margin: 0.3rem 0;
+    transition: background-color 0.3s; 
+}
+
+/* Change color on hover or when active */
+.hamburger:hover .bar {
+    background-color: var(--accent-color); 
+}
+
+.hamburger.active .bar {
+    background-color: var(--accent-color); 
+}
+
+.navbar {
+    display: block;
+}
+
+.site-footer .footer-menu-container ul li a {
+    font-size: 1.1rem;
+}
+
+.header-menu-container ul li a:hover,
+.footer-menu-container ul li a:hover {
+    color: var(--accent-color); 
 }
 
 .site-footer {
@@ -190,14 +231,14 @@ img {
     padding-top: 1rem;
 }
 
-.footer-menu li a {
-    font-size: 1rem;
-    padding: 0 1rem;
-}
-
 .sidebar {
     align-items: center;
 }
+
+.search-form-footer {
+    padding: 0.5rem 0;
+}
+
 
 .sidebar-static,
 .widget-dynamic,
@@ -225,27 +266,12 @@ img {
 }
 
 .newsletter-section {
-    width: 100%;
-    margin: auto;
-}
-
-.newsletter-form {
+    width: 60%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 1rem;
-}
-
-.newsletter-form input {
-    width: 15rem;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-family: Montserrat-Regular;
-}
-
-.newsletter-form button {
-    background-color: var(--accent-color);
+    margin: auto;
 }
 
 .footer-copyright {
@@ -349,7 +375,7 @@ img {
 }
 
 .post-thumbnail-index img{
-    height: 10rem;
+    height: 15rem;
 }
 
 .post-info {
@@ -504,7 +530,7 @@ img {
 /* post navigation */
 
 .post-navigation, .pagination-index,
-.pagination-search {
+.pagination-search, .comment-navigation {
     display: flex;
     justify-content: space-between; 
     align-items: center; 
@@ -532,27 +558,124 @@ img {
 .searchform [type="submit"],
 .newsletter-form button,
 .pagination-search a {
-    background-color: var(--white-color);
-    display: inline-block; /* Make it block for better clickability */
-    padding: 0.5rem 1rem; /* Add some padding */
-    color: var(--primary-color); /* Change link color */
-    text-decoration: none; /* Remove underline */
-    border: 2px solid var(--primary-color); /* Optional: Add border */
-    border-radius: 5px; /* Round the button corners */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    background-color: var(--accent-color);
+    display: inline-block; 
+    padding: 0.5rem 1rem; 
+    color: var(--white-color); 
+    text-decoration: none; 
+    border: none;
+    border-radius: 5px; 
+    transition: background-color 0.3s, color 0.3s; 
 }
 
 .nav-previous a:hover,
 .nav-next a:hover, .pagination-index a:hover,
 .searchform [type="submit"]:hover,
 .pagination-search a:hover  {
-    background-color: var(--primary-color); /* Change background on hover */
-    color: white; /* Change text color on hover */
+    background-color: var(--white-color); 
+    color: var(--secondary-color);
     cursor: pointer;
+    transform: scale(1.05); /* Slightly increase the size on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 /* front  page styling  */
 .hero {
     margin-top: 1rem;
+}
+
+/* commentes styling */
+
+.comments-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.comment-list {
+    width: 60%;
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+}
+
+.comment {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+}
+
+.comment img {
+    max-width: 2rem;
+    height: auto;
+    border-radius: 50%;
+}
+
+.comment-author {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    font-weight: bold;
+    color: var(--accent-color, #333); /* Primary text color */
+}
+
+.comment-meta {
+    font-size: 0.8rem;
+    color: var(--darkgray--color);
+    margin: 0.5rem 0;
+}
+
+.comment-content {
+    margin-top: 0.5rem;
+}
+
+.no-comments {
+    font-style: italic;
+    color: #999; /* Grey color for no comments message */
+}
+
+/* Comment form styling */
+.comment-form {
+    width: 60%;
+    margin-top: 1rem;
+    background-color: var(--content-bg-color, #f9f9f9);
+    border-radius: 5px;
+}
+
+.comment-notes, .comment-form-cookies-consent {
+    font-size: medium;
+    color: var(--darkgray--color);
+}
+
+/* Input and textarea styling */
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 3px;
+}
+
+.form-submit {
+    padding: 1rem 0;
+}
+.form-submit .submit {
+    background-color: var(--white-color);
+    color: var(--accent-color);
+    border: none;
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; 
+    border: 2px solid var(--primary-color);
+    border-radius: 5px; 
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+/* Button hover styling */
+.form-submit .submit:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 /* search form styling */
@@ -571,6 +694,7 @@ img {
     font-family: Montserrat-Regular;
     border: 1px solid lightgray;
     border-radius: 10px;
+    padding: 0 0.5rem;
 }
 
 /* archive styling */
@@ -607,15 +731,25 @@ img {
 
 
 /* responsivness */
+@media screen and (max-width: 1200px) {
+    .post-thumbnail-index img{
+        height: 12rem;
+    }
+}
 
 @media screen and (max-width: 992px) {
-    .header-wrapper {
+    .header-rwd {
         flex-direction: column;
-        margin-bottom: 2rem;
+        margin: 0 1rem;
     }
     #site-logo {
         margin-bottom: 1rem;
     }
+
+    .content-wrapper {
+        padding-top: 8rem;
+    }
+
     .posts-grid {
         grid-template-columns: repeat(2, 1fr); 
     }
@@ -623,16 +757,76 @@ img {
     .content-container {
         width: 90%;
     }
-}
 
+    .newsletter-section {
+        width: 100%;
+        padding-top: 1rem;
+    }
+
+    .search-form-footer {
+        padding: 0.3rem 0;
+    }
+    .comment-list {
+        width: 80%;
+    }
+
+    .comment-form {
+        width: 80%;
+    }
+}
 @media screen and (max-width: 786px) {
+
+    .content-wrapper {
+        padding-top: 8rem;
+    }
+
+    .hamburger {
+        display: block; 
+    }
+
+    .navbar {
+        display: none; 
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .header-menu {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header-menu li {
+       padding: 1rem 0;
+    }
+
+    .navbar.active {
+        display: block; 
+    }
+
+    .navbar.open {
+        display: block;
+    }
+
     .sidebar-static {
         flex-direction: column;
     }
     .posts-grid {
         grid-template-columns: 1fr; 
     }
-    
+    .comment-list {
+        width: 95%;
+    }
+
+    .comment-form {
+        width: 95%;
+    }
+
+
 }
 
 @media (max-width: 480px) {

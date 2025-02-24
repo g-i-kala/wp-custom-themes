@@ -49,8 +49,8 @@ if ( ! function_exists( 'kalissima_setup' ) ) :
 		 * Add support for two custom navigation menus.
 		 */
 		register_nav_menus( array(
-			'header-menu'   => __( 'Header Menu', 'kalissima' ),
-			'footer-menu' => __( 'Footer Menu', 'kalissima' ),
+			'header-menu'   => __( 'Primary Menu', 'kalissima' ),
+			'footer-menu' => __( 'Secondary Menu', 'kalissima' ),
 		) );
 
 		/**
@@ -58,8 +58,6 @@ if ( ! function_exists( 'kalissima_setup' ) ) :
 		 * aside, gallery, quote, image, and video
 		 */
 		add_theme_support( 'post-formats', array( 'aside', 'gallery', 'quote', 'image', 'video' ) );
-
-		add_theme_support( 'custom-background' );
 		
 		add_theme_support( 'custom-logo', array(
 			'height'               => 0,
@@ -76,28 +74,13 @@ if ( ! function_exists( 'kalissima_setup' ) ) :
 endif; // kalissima_setup
 add_action( 'after_setup_theme', 'kalissima_setup' );
 
-//Header customization 
+//jQuery enqueue
 
-function kalissima_custom_header_setup() {
-    $defaults = array(
-        'default-image'          => '',
-		'random-default'         => false,
-		'width'                  => 0,
-		'height'                 => 0,
-		'flex-height'            => false,
-		'flex-width'             => false,
-		'default-text-color'     => '',
-		'header-text'            => true,
-		'uploads'                => true,
-		'wp-head-callback'       => '',
-		'admin-head-callback'    => '',
-		'admin-preview-callback' => '',
-		'video'                  => false,
-		'video-active-callback'  => 'is_front_page',
-		);
-    add_theme_support( 'custom-header', $defaults );
+function my_theme_enqueue_jquery() {
+    wp_enqueue_script('jquery');
+	wp_enqueue_script('hamburger-js', get_template_directory_uri() . '/assets/js/hamburger.js', array('jquery'), null, true);
 }
-add_action( 'after_setup_theme', 'kalissima_custom_header_setup' );
+add_action('wp_enqueue_scripts', 'my_theme_enqueue_jquery');
 
 //Links all Post Thumbnails on your website to the Post Permalink
 
@@ -112,7 +95,7 @@ function my_theme_load_textdomain() {
 }
 add_action('after_setup_theme', 'my_theme_load_textdomain');
 
-//generate all sub sizes using webp
+//Generate all sub sizes using webp
 
 function wporg_image_editor_output_format( $formats ) {
     $formats['image/jpg'] = 'image/webp';
@@ -121,14 +104,14 @@ function wporg_image_editor_output_format( $formats ) {
 }
 add_filter( 'image_editor_output_format', 'wporg_image_editor_output_format' );
 
-//supported post formats when custom post types => add here
+//Supported post formats when custom post types => add here
 
 function themename_post_formats_setup() {
 	add_theme_support( 'post-formats', array( 'aside', 'gallery', 'image' ) );
 }
 add_action( 'after_setup_theme', 'themename_post_formats_setup' );
 
-//sidebar registartion
+//Sidebar registartion
 
 add_action( 'widgets_init', 'my_register_sidebars' );
 function my_register_sidebars() {
@@ -146,6 +129,18 @@ function my_register_sidebars() {
 	);
 	/* Repeat register_sidebar() code for additional sidebars. */
 }
+
+// Limit search results to 9
+
+function pd_search_posts_per_page($query) {
+    if ( $query->is_search ) {
+        $query->set( 'posts_per_page', '6' );
+    }
+    return $query;
+}
+add_filter( 'pre_get_posts','pd_search_posts_per_page' );
+
+// Customizer Customization Section
 
 // Add custom hero image on front page
 function kalissima_customize_register($wp_customize) {
@@ -170,9 +165,37 @@ function kalissima_customize_register($wp_customize) {
 }
 add_action('customize_register', 'kalissima_customize_register');
 
-// newletter on/off
+//Page menu set suggestion for bettwer UX 
 
-function mytheme_customize_register( $wp_customize ) {
+function my_customizer_menu_alert($wp_customize) {
+    // Check if a menu is set
+    if (!has_nav_menu('header-menu') || !has_nav_menu('footer-menu')) {
+        $wp_customize->add_section('menu_alert_section', array(
+            'title'    => __('⚠️ Navigation Notice', 'kalissima'),
+            'priority' => 1,
+        ));
+
+        $wp_customize->add_setting('menu_alert', array(
+            'sanitize_callback' => 'wp_kses_post',
+        ));
+
+        $wp_customize->add_control(new WP_Customize_Control(
+            $wp_customize,
+            'menu_alert',
+            array(
+                'label'       => __('No Menu Assigned', 'kalissima'),
+                'section'     => 'menu_alert_section',
+                'type'        => 'hidden', // Doesn't show a control, only a message
+                'description' => __('<strong>⚠️Set a navigation menu</strong> in <a href="' . admin_url('nav-menus.php') . '" target="_blank">Appearance → Menus</a> for a better experience.', 'kalissimia'),
+            )
+        ));
+    }
+}
+add_action('customize_register', 'my_customizer_menu_alert');
+
+// Newletter on/off
+
+function mytheme_customize_newsletter( $wp_customize ) {
     $wp_customize->add_section( 'newsletter_section', array(
         'title'    => __( 'Newsletter', 'kalissima' ),
         'priority' => 120,
@@ -189,15 +212,40 @@ function mytheme_customize_register( $wp_customize ) {
         'settings' => 'show_newsletter',
         'type'     => 'checkbox',
     ) );
-}
-add_action( 'customize_register', 'mytheme_customize_register' );
 
-// limit search results to 9
+	$wp_customize->add_setting('newsletter_wsform_id', array(
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
 
-function pd_search_posts_per_page($query) {
-    if ( $query->is_search ) {
-        $query->set( 'posts_per_page', '6' );
-    }
-    return $query;
+    $wp_customize->add_control('newsletter_wsform_id', array(
+        'label' => __('Newsletter WSform ID', 'kalissima'),
+        'section' => 'newsletter_section',
+        'type' => 'text',
+		'description' => __('Enter the WS Form ID for your newsletter form.', 'kalissima'),
+    ));
 }
-add_filter( 'pre_get_posts','pd_search_posts_per_page' );
+add_action( 'customize_register', 'mytheme_customize_newsletter' );
+
+// Footer Widget on/off
+
+function mytheme_customize_footer_widget( $wp_customize ) {
+    $wp_customize->add_section( 'footer_widget_section', array(
+        'title'    => __( 'Footer Widget', 'kalissima' ),
+        'priority' => 120,
+    ) );
+
+    $wp_customize->add_setting( 'show_footer_widget', array(
+        'default'   => true,
+        'transport' => 'refresh',
+    ) );
+
+    $wp_customize->add_control( 'show_footer_widget_control', array(
+        'label'    => __( 'Show Footer Widget', 'kalissima' ),
+        'section'  => 'footer_widget_section',
+        'settings' => 'show_footer_widget',
+        'type'     => 'checkbox',
+		'description' => __('<strong>Remember to pick a nice Widget <a href="' . admin_url('widgets.php') . '" target="_blank">Appearance → Widgets</a> for a better user experience.', 'kalissimia'),
+    ) );
+}
+add_action( 'customize_register', 'mytheme_customize_footer_widget' );

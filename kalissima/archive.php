@@ -37,6 +37,7 @@ get_header(); ?>
         <?php get_search_form(array('aria_label' => __('Site search', 'kalissima'))); ?>
     </div>
     
+    <!-- Archive Listing -->
     <div class="archive-content flex flex-row"> 
         <div class="archive-column">
             <h2 class="archive-header">Archives by Month:</h2>

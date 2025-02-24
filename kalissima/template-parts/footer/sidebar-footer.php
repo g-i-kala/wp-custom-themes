@@ -19,29 +19,35 @@
                 <p class="site-description"><?php bloginfo('description'); ?></p>
             <?php } ?>
 
-            <div class="site-nav">
+            <div class="site-nav footer-menu-container">
             <?php
             wp_nav_menu( array(
                 'theme_location' => 'footer-menu',
                 'container' => 'nav-footer',
-                'container_class' => 'footer-menu-container',
                 'menu_class' => 'footer-menu',
             ) );
             ?>
             </div>                
         </div>
         
-        <?php if ( get_theme_mod( 'show_newsletter', true ) ) : ?>
+        <?php if ( get_theme_mod( 'show_newsletter', true ) ) { ?>
             <div class="footer-column-wrapper">
                 <?php get_template_part('template-parts/footer/newsletter','form');?>
             </div>
-        <?php endif; ?>
-    
+        <?php } else { ?>
+            <div class="footer-column-wrapper">
+                <?php get_template_part('template-parts/footer/search','form');?>
+            </div>
+
+        <?php } ?>
     </div>
 
 <!-- dynamic widget if set     -->
-<div class="widget-dynamic">
-    <?php if (is_active_sidebar('primary')) { ?>
-    <?php dynamic_sidebar('primary'); ?>
-    <?php }?>
-</div>        
+
+<?php if ( get_theme_mod( 'show_footer_widget', true ) ) : ?>
+    <div class="widget-dynamic">
+        <?php if (is_active_sidebar('primary')) { ?>
+        <?php dynamic_sidebar('primary'); ?>
+        <?php }?>
+    </div>        
+<?php endif; ?>
