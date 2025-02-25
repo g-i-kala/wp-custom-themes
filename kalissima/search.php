@@ -11,7 +11,7 @@
 
         <header class="search-header">
                 <h1 class="page-title">
-                    * <?php the_search_query(); // Displays category/tag/author name dynamically ?> *
+                    <?php the_search_query(); ?> 
                 </h1>
         </header>
 

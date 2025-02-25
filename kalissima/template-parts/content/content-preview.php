@@ -17,7 +17,12 @@
                 <span><?php echo get_the_date(); ?></span>
             </div>
             <p class="post-excerpt"><?php echo get_the_excerpt(); ?></p>
-            <a class="read-more" href="<?php the_permalink(); ?>"><?php _e('Read More', 'kalissima'); ?></a>
+            <a 
+            class="read-more read-more-link-preview" 
+            href="<?php the_permalink(); ?>" 
+            data-post-title="<?php echo esc_attr(get_the_title()); ?>">
+            <?php _e('Read More', 'kalissima'); ?>
+            </a>
         </div>
     <!-- </div> -->
 </article>

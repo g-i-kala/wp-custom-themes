@@ -4,13 +4,14 @@
  */
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="<?php bloginfo('description'); ?>">
     <title><?php wp_title('|', true, 'right'); ?></title>
-    <link rel="stylesheet" href="<?php echo esc_url(get_stylesheet_uri()); ?>" type="text/css" />
+
     <?php wp_head(); ?>
 </head>
 
@@ -28,7 +29,9 @@
                     <div class="header-logo">
                         <?php if ( has_custom_logo() ) { ?>
                             <div id="site-logo">
-                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" 
+                                rel="home"
+                                aria-label="<?php esc_attr_e('Site Logo', 'kalissima'); ?>">
                                 <?php the_custom_logo(); ?>
                             </div>
                         <?php } else { ?>
@@ -37,14 +40,14 @@
                         <?php } ?>
                     </div>
                     
-                    <button class="hamburger" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="hamburger" aria-expanded="false" aria-label="<?php _e('Toggle navigation','kalissima') ?>" aria-controls="navbar">
                         <span class="bar"></span>
                         <span class="bar"></span>
                         <span class="bar"></span>
                     </button>
 
                     <div class="site-nav header-menu-container">
-                        <nav class="navbar">
+                        <nav role="navigation" aria-label="<?php _e('Main Navigation', 'kalissima'); ?>" class="navbar">
                             <?php
                             wp_nav_menu( array(
                                 'theme_location' => 'header-menu',

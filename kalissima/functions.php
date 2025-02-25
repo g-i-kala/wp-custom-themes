@@ -59,6 +59,19 @@ if ( ! function_exists( 'kalissima_setup' ) ) :
 		 */
 		add_theme_support( 'post-formats', array( 'aside', 'gallery', 'quote', 'image', 'video' ) );
 		
+        add_theme_support(
+			'html5',
+			array(
+				'comment-form',
+				'comment-list',
+				'gallery',
+				'caption',
+				'style',
+				'script',
+				'navigation-widgets',
+			)
+		);
+
 		add_theme_support( 'custom-logo', array(
 			'height'               => 0,
 			'width'                => 0,
@@ -74,15 +87,39 @@ if ( ! function_exists( 'kalissima_setup' ) ) :
 endif; // kalissima_setup
 add_action( 'after_setup_theme', 'kalissima_setup' );
 
-//jQuery enqueue
+// Enqueues scripts and styles.
 
-function my_theme_enqueue_jquery() {
+function kalissima_scripts() {
+       wp_enqueue_style( 'kalissima', get_template_directory_uri() . '/style.css');
+   
+    // Main navigation scripts.
+
+    //jQuery enqueue
+
     wp_enqueue_script('jquery');
 	wp_enqueue_script('hamburger-js', get_template_directory_uri() . '/assets/js/hamburger.js', array('jquery'), null, true);
-}
-add_action('wp_enqueue_scripts', 'my_theme_enqueue_jquery');
 
-//Links all Post Thumbnails on your website to the Post Permalink
+    // Aria read more sqript enque
+
+    wp_enqueue_script(
+        'aria-enhancements', 
+        get_template_directory_uri() . '/assets/js/aria-enhancements.js', 
+        array(), 
+        null, 
+        true // Load in the footer
+    );
+}
+add_action( 'wp_enqueue_scripts', 'kalissima_scripts' );
+
+// Load the textdomain
+
+function kalissima_load_textdomain() {
+    load_theme_textdomain('kalissima', get_template_directory() . '/languages');
+}
+add_action('after_setup_theme', 'kalissima_load_textdomain');
+
+
+// Links all Post Thumbnails on your website to the Post Permalink
 
 add_filter( 'post_thumbnail_html', 'my_post_image_html', 10, 3 );
 function my_post_image_html( $html, $post_id, $post_image_id ) {
@@ -95,7 +132,7 @@ function my_theme_load_textdomain() {
 }
 add_action('after_setup_theme', 'my_theme_load_textdomain');
 
-//Generate all sub sizes using webp
+// Generate all sub sizes using webp
 
 function wporg_image_editor_output_format( $formats ) {
     $formats['image/jpg'] = 'image/webp';
@@ -104,14 +141,14 @@ function wporg_image_editor_output_format( $formats ) {
 }
 add_filter( 'image_editor_output_format', 'wporg_image_editor_output_format' );
 
-//Supported post formats when custom post types => add here
+// Supported post formats when custom post types => add here
 
 function themename_post_formats_setup() {
 	add_theme_support( 'post-formats', array( 'aside', 'gallery', 'image' ) );
 }
 add_action( 'after_setup_theme', 'themename_post_formats_setup' );
 
-//Sidebar registartion
+// Sidebar registartion
 
 add_action( 'widgets_init', 'my_register_sidebars' );
 function my_register_sidebars() {
@@ -127,7 +164,6 @@ function my_register_sidebars() {
 			'after_title'   => '</h3>',
 		)
 	);
-	/* Repeat register_sidebar() code for additional sidebars. */
 }
 
 // Limit search results to 9

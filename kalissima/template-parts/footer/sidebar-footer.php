@@ -11,7 +11,9 @@
             
             <?php if ( has_custom_logo() ) { ?>
                 <div id="site-logo">
-                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" 
+                    rel="home"
+                    aria-label="<?php esc_attr_e('Site Logo', 'kalissima'); ?>">
                     <?php the_custom_logo(); ?>
                 </div>
             <?php } else { ?>
@@ -23,8 +25,11 @@
             <?php
             wp_nav_menu( array(
                 'theme_location' => 'footer-menu',
-                'container' => 'nav-footer',
+                'container' => 'nav',
+                'container_class' => 'footer-navigation',
                 'menu_class' => 'footer-menu',
+                'fallback_cb' => false,
+                'depth' => 1
             ) );
             ?>
             </div>                
