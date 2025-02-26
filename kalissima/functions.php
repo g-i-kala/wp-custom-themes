@@ -229,11 +229,11 @@ function my_customizer_menu_alert($wp_customize) {
 }
 add_action('customize_register', 'my_customizer_menu_alert');
 
-// Newletter on/off
+// WSform integration
 
-function mytheme_customize_newsletter( $wp_customize ) {
-    $wp_customize->add_section( 'newsletter_section', array(
-        'title'    => __( 'Newsletter', 'kalissima' ),
+function kalissima_customize_wsforms( $wp_customize ) {
+    $wp_customize->add_section( 'wsform_section', array(
+        'title'    => __( 'WSform Integration', 'kalissima' ),
         'priority' => 120,
     ) );
 
@@ -244,7 +244,7 @@ function mytheme_customize_newsletter( $wp_customize ) {
 
     $wp_customize->add_control( 'show_newsletter_control', array(
         'label'    => __( 'Show Newsletter Form', 'kalissima' ),
-        'section'  => 'newsletter_section',
+        'section'  => 'wsform_section',
         'settings' => 'show_newsletter',
         'type'     => 'checkbox',
     ) );
@@ -256,12 +256,27 @@ function mytheme_customize_newsletter( $wp_customize ) {
 
     $wp_customize->add_control('newsletter_wsform_id', array(
         'label' => __('Newsletter WSform ID', 'kalissima'),
-        'section' => 'newsletter_section',
+        'section' => 'wsform_section',
         'type' => 'text',
 		'description' => __('Enter the WS Form ID for your newsletter form.', 'kalissima'),
     ));
+
+
+	$wp_customize->add_setting('contactform_wsform_id', array(
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('contactform_wsform_id', array(
+        'label' => __('Contact Form WSform ID', 'kalissima'),
+        'section' => 'wsform_section',
+        'type' => 'text',
+		'description' => __('Enter the WS Form ID for your contact form. ', 'kalissima'),
+    ));
 }
-add_action( 'customize_register', 'mytheme_customize_newsletter' );
+add_action( 'customize_register', 'kalissima_customize_wsforms' );
+
+
 
 // Footer Widget on/off
 
@@ -285,3 +300,4 @@ function mytheme_customize_footer_widget( $wp_customize ) {
     ) );
 }
 add_action( 'customize_register', 'mytheme_customize_footer_widget' );
+

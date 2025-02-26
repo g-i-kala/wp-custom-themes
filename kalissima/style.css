@@ -68,6 +68,10 @@ h1 {
     font-weight: 800;
 }
 
+h2, h3, h4, h5, h6 {
+	margin-bottom: 0.8rem;
+}
+
 a {
     color: var(--secondary-color);
 }
@@ -311,13 +315,15 @@ img {
     margin: 0.5rem 0;
 }
 
-
-
 .page-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.page-content {
+    justify-content: center;
 }
 
 .search-404 {
@@ -750,12 +756,17 @@ img {
     width: 100%; 
 }
 
+/* contact from page template styling */
+
+.contact-form-wrapper {
+    width: 60%;
+}
+
 /* search results styling */
 
 .pagination-archive {
     width: 100%;
 }
-
 
 /* responsivness */
 @media screen and (max-width: 1200px) {
@@ -851,6 +862,10 @@ img {
 
     .comment-form {
         width: 95%;
+    }
+
+    .contact-form-wrapper {
+        width: 100%;
     }
 
 

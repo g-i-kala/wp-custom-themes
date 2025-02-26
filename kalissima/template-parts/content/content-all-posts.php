@@ -3,14 +3,14 @@
 $normal_args = array(
     'post__not_in' => $sticky,
     'posts_per_page' => 6,
-    'category_name'   => 'kite', // Multiple tag slugs
+    //'category_name'   => 'kite', // Multiple tag slugs
     'paged' => get_query_var('paged') ? get_query_var('paged') : 1
 );
 $normal_query = new WP_Query($normal_args);
 ?>
 
 <section class="normal-posts">
-    <h1 class="section-title"><?php _e('Latest Posts', 'kalissima'); ?></h1>
+    <h1 class="section-title"><?php _e('Blog Posts', 'kalissima'); ?></h1>
     <div class="posts-grid">
         <?php if ($normal_query->have_posts()) : ?>
             <?php while ($normal_query->have_posts()) : $normal_query->the_post(); ?>

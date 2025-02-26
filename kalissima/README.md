@@ -30,6 +30,9 @@ Kalissima is a custom WordPress theme designed for bloggers and content creators
 - `template-parts/footer/search-form.php`: Footer search form if WSforms newsletter disabled - customizable.
 - `template-parts/footer/sidebar-footer.php`: Hardcoded, footer menu & newsletter signup/search bar - customizable.
 
+## 2.5. Template Pages
+- `theme-templates/page-contact.php`: Template for displaying a contact page with WSform integration - customizable in the customizer.
+
 ### 3. Functions and Features
 - `functions.php`: Main theme functions file where you can enqueue scripts/styles, register menus, add theme support, etc.
   - Custom Navigation: Use `wp_nav_menu()` to create a custom navigation menu (2 menus: header and footer, customizable). 
@@ -39,7 +42,9 @@ Kalissima is a custom WordPress theme designed for bloggers and content creators
   - Enqueue Scripts and Styles: Properly enqueue your stylesheets and scripts.
 - Customizable in the Customizer:
   - Logo image.
-  - Newsletter/Search bar in footer on/off & WSform integration.
+  - WSform integration.
+    - Newsletter/Search bar in footer on/off 
+    - Contact page form
   - Menus: header & footer.
 
 ### 4. Assets
