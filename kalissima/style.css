@@ -197,11 +197,15 @@ img {
 .header-menu-container ul li a,
 .footer-menu-container ul li a {
     text-decoration: none;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 600;
     font-family: 'TitilliumWeb-Regular';
     color: var(--secondary-color);
     letter-spacing: 0.1rem;
+}
+
+.menu-menu-container .header-menu .current-menu-item a {
+    color: var(--accent-color);
 }
 
 /* Hamburger Menu */
@@ -239,7 +243,7 @@ img {
 }
 
 .site-footer .footer-menu-container ul li a {
-    font-size: 1.1rem;
+    font-size: 1.0rem;
 }
 
 .header-menu-container ul li a:hover,

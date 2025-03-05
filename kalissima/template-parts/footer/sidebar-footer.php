@@ -15,6 +15,7 @@
                     rel="home"
                     aria-label="<?php esc_attr_e('Site Logo', 'kalissima'); ?>">
                     <?php the_custom_logo(); ?>
+                    </a>
                 </div>
             <?php } else { ?>
                 <h1 class="site-title"><?php bloginfo('name'); ?></h1>
