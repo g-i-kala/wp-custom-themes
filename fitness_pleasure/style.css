@@ -1,0 +1,72 @@
+/*
+* Theme Name: Fitness Pleasure
+* Author: Kalissima
+*/
+
+@font-face{
+    font-family: 'DMSans';
+    src: url('assets/fonts/DM_Sans/DMSans-VariableFont_opsz\,wght.ttf');
+    src: local('☺'),
+    url('assets/fonts/DM_Sans/DMSans-VariableFont_opsz\,wght.ttf') format('truetype');
+}
+
+/* Eric Meyer’s Reset */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+html {
+    font-family: DMSans;
+}
+
+
+/* WCAG */
+.screen-reader-text {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px; 
+    left: 0;
+    background: #fff; 
+    padding: 8px 15px; 
+    z-index: 100;
+    transition: top 0.2s; 
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+.content__container {
+    margin: 0 auto;
+    width: 80%;
+}
+
+/* responsivness */
+@media screen and (max-width: 1200px) {
+    .post-thumbnail-index img{
+        height: 12rem;
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+    .content__container {
+        width: 90%;
+    }
+}
+@media screen and (max-width: 786px) {
+     
+    .content__container {
+        width: 100%;
+    }
+}
