@@ -6,13 +6,15 @@
         'title_size' => 'text-2xl'
         )); ?>
     
-    <button class="hamburger block lg:hidden cursor-pointer bg-transparent border-0 p-2.5 " aria-expanded="false" aria-label="<?php _e('Toggle navigation','fitness_pleasure') ?>" aria-controls="navbar">
-        <span class="bar block w-8 h-1 my-1.5 bg-white rounded-lg mx-auto transition-all duration-300"></span>
+    <button id="mobile-menu" class="mobile-menu block lg:hidden cursor-pointer bg-transparent border-0 p-2.5" aria-expanded="false" aria-label="<?php _e('Toggle navigation','fitness_pleasure') ?>" aria-controls="navbar">
+        <span class="bar block w-8 h-1 my-1.5 bg-white 200rounded-lg mx-auto transition-all duration-300"></span>
         <span class="bar block w-8 h-1 my-1.5 bg-white rounded-lg mx-auto transition-all duration-300"></span>
         <span class="bar block w-8 h-1 my-1.5 bg-white rounded-lg mx-auto transition-all duration-300"></span>
     </button>
     
     <!-- Menu -->
     <?php get_template_part('template-parts/components/site-menu', null, array('menu_class' => 'flex-col md:flex-row')); ?>           
+    
+    <?php get_template_part('template-parts/navigation/menu','mobile'); ?>           
 
 </div>

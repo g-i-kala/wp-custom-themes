@@ -51,6 +51,10 @@ html {
     width: 80%;
 }
 
+/* .mobile-menu.active .bar {
+   background-color: aquamarine;
+} */
+
 /* responsivness */
 @media screen and (max-width: 1200px) {
     .post-thumbnail-index img{

@@ -100,8 +100,8 @@ function fitness_pleasure_scripts() {
 
     //jQuery enqueue
 
-    //wp_enqueue_script('jquery');
-	//wp_enqueue_script('hamburger-js', get_template_directory_uri() . '/assets/js/hamburger.js', array('jquery'), null, true);
+    wp_enqueue_script('jquery');
+	wp_enqueue_script('mobile-menu-js', get_template_directory_uri() . '/assets/js/mobile-menu.js', array('jquery'), null, true);
 
     // Aria read more sqript enque
 

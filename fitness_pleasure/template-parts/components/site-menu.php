@@ -4,7 +4,7 @@ $menu_class = esc_attr($args['menu_class']);
 ?>
 
 <!-- Menu -->
-<div class="site-nav header-menu-container hidden lg:block">
+<div id="navbar" class="site-nav header-menu-container hidden lg:block">
     <nav role="navigation" aria-label="<?php _e('Main Navigation', 'fitness_pleasure'); ?>" class="navbar font-thin">
         <?php
         wp_nav_menu( array(
